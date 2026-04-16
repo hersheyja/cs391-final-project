@@ -1,20 +1,14 @@
 // Button.tsx
-// Global: Button that spins 360 degrees when clicked, then reveals a new challenge.
-// Component Author: Hershey Jamla &
+// Global: Button that fetches a new random word when clicked.
+// First click says "Pick My Word", after that says "New Word".
+// Component Author: Hershey Jamla
+// TODO (teammate): wire onSpin prop in App.tsx to fetch a random word from API and pass it to Word
 
-// wire onSpin prop in App.tsx to pick a random challenge and pass it to Word
-
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useState } from "react";
 
-// 360 spin animation
-const spin = keyframes`
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-`;
-
-// Button that plays spin animation when spinning state is true
-const StyledButton = styled.button<{ $spinning: boolean }>`
+// Styled button
+const StyledButton = styled.button`
     background-color: #cc0000;
     color: white;
     border: none;
@@ -24,28 +18,29 @@ const StyledButton = styled.button<{ $spinning: boolean }>`
     font-weight: bold;
     cursor: pointer;
     margin: 16px;
-    animation: ${({ $spinning }) => $spinning ? spin : "none"} 0.5s ease;
 
-   
+    &:hover {
+        background-color: #aa0000;
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
 `;
 
 // Button component - built by Hershey Jamla
 export default function Button({ onSpin }: { onSpin?: () => void }) {
-    // controls whether the spin animation is playing
-    const [spinning, setSpinning] = useState(false);
+    // tracks if user has clicked at least once
+    const [clicked, setClicked] = useState(false);
 
-    // spin the button for 0.5s then call onSpin
     function handleClick() {
-        setSpinning(true);
-        setTimeout(() => {
-            setSpinning(false);
-            if (onSpin) onSpin();
-        }, 500);
+        setClicked(true);
+        if (onSpin) onSpin();
     }
 
     return (
-        <StyledButton $spinning={spinning} onClick={handleClick}>
-             Feeling Adventurous? 🎲
+        <StyledButton onClick={handleClick}>
+            {clicked ? "New Word" : "Pick My Word"}
         </StyledButton>
     );
 }
