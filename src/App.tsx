@@ -1,3 +1,8 @@
+// App.tsx
+// Global: Entry point for the Public Speaking Practice App.
+// Users click a button to get a random word, then use the timer to practice speaking about it.
+// Sets up routing using createBrowserRouter and RouterProvider.
+
 import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router";
 import styled from "styled-components";
 import Word from "./components/Word.tsx";
@@ -5,64 +10,71 @@ import Button from "./components/Button.tsx";
 import Timer from "./components/Timer.tsx";
 import Language from "./components/Language.tsx";
 
-// Main page wrapper
+// Page wrapper
 const StyledWrapper = styled.div`
     width: 80vw;
     margin: 0 auto;
     min-height: 100vh;
     background-color: #f5f5f5;
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
-// Page title
+// App title
 const StyledTitle = styled.h1`
     text-align: center;
     color: #cc0000;
-    font-size: 2rem;
+    font-size: calc(1.5rem + 1vw);
+    margin-bottom: 4px;
+`;
+
+// App subtitle
+const StyledSubtitle = styled.p`
+    text-align: center;
+    color: #666666;
+    font-size: calc(0.9rem + 0.2vw);
     margin-bottom: 24px;
 `;
 
-// Root layout component
+// Root layout
 function Root() {
-  return (
-      <StyledWrapper>
-        {/* App title */}
-        <StyledTitle>BU Challenge Generator</StyledTitle>
-        <Routes>
-          <Route path="/" element={
-            <>
-              {/* Category filter - built by  */}
-              <Timer />
+    return (
+        <StyledWrapper>
+            <Routes>
+                <Route path="/" element={
+                    <>
+                        {/* App title and description */}
+                        <StyledTitle>🗣️ Word Up</StyledTitle>
+                        <StyledSubtitle>Practice your public speaking — one word at a time.</StyledSubtitle>
 
-              {/* Spin button - built by  */}
-              <Button />
+                        {/* Language toggle - TODO teammate */}
+                        <Language />
 
-              {/* Challenge card - built by Hershey Jamla */}
-              <Word challenge={{
-                title: "Eat at every dining hall in one day",
-                description: "Visit all BU dining halls before midnight.",
-                category: "Food",
-                difficulty: "Hard"
-              }} />
+                        {/* Pick word button - built by Hershey Jamla */}
+                        <Button />
 
-              {/* History log - built by  */}
-              <Language />
-            </>
-          } />
-        </Routes>
-      </StyledWrapper>
-  );
+                        {/* Word card - TODO teammate wire to API */}
+                        <Word />
+
+                        {/* Timer - built by Hershey Jamla */}
+                        <Timer />
+                    </>
+                } />
+            </Routes>
+        </StyledWrapper>
+    );
 }
 
-// Browser router setup
 const router = createBrowserRouter(
     [{ path: "*", Component: Root }]
 );
 
 export default function App() {
-  return (
-      <>
-        <RouterProvider router={router} />
-      </>
-  );
+    return (
+        <>
+            <RouterProvider router={router} />
+        </>
+    );
 }
