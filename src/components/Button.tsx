@@ -2,7 +2,6 @@
 // Global: Button that fetches a new random word when clicked.
 // First click says "Pick My Word", after that says "New Word".
 // Component Author: Hershey Jamla
-// TODO (teammate): wire onSpin prop in App.tsx to fetch a random word from API and pass it to Word
 
 import styled from "styled-components";
 import { useState } from "react";

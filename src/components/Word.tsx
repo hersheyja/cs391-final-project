@@ -1,7 +1,6 @@
 // Word.tsx
 // Global: Displays a random word for the user to practice speaking about.
 // Component Author: Hershey Jamla
-// TODO (teammate): accept a word prop from App.tsx once API is wired up
 
 import styled from "styled-components";
 

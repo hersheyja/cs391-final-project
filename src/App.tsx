@@ -5,10 +5,12 @@
 
 import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router";
 import styled from "styled-components";
+import { useState } from "react";
 import Word from "./components/Word.tsx";
 import Button from "./components/Button.tsx";
 import Timer from "./components/Timer.tsx";
 import Language from "./components/Language.tsx";
+import { fetchRandomWord } from "./apis.tsx";
 
 // Page wrapper
 const StyledWrapper = styled.div`
@@ -40,6 +42,13 @@ const StyledSubtitle = styled.p`
 
 // Root layout
 function Root() {
+    const [word, setWord] = useState<string>();
+
+    async function handleSpin() {
+        const randomWord = await fetchRandomWord();
+        setWord(randomWord);
+    }
+
     return (
         <StyledWrapper>
             <Routes>
@@ -53,10 +62,10 @@ function Root() {
                         <Language />
 
                         {/* Pick word button - built by Hershey Jamla */}
-                        <Button />
+                        <Button onSpin={handleSpin} />
 
-                        {/* Word card - TODO teammate wire to API */}
-                        <Word />
+                        {/* Word card */}
+                        <Word word={word} />
 
                         {/* Timer - built by Hershey Jamla */}
                         <Timer />
