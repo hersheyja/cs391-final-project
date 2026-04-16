@@ -1,8 +1,8 @@
-// SpinButton.tsx
+// Button.tsx
 // Global: Button that spins 360 degrees when clicked, then reveals a new challenge.
-// Component Author: Hershey Jamla
+// Component Author: Hershey Jamla &
 
-// wire onSpin prop in App.tsx to pick a random challenge and pass it to ChallengeCard
+// wire onSpin prop in App.tsx to pick a random challenge and pass it to Word
 
 import styled, { keyframes } from "styled-components";
 import { useState } from "react";
@@ -29,8 +29,8 @@ const StyledButton = styled.button<{ $spinning: boolean }>`
    
 `;
 
-// SpinButton component - built by Hershey Jamla
-export default function SpinButton({ onSpin }: { onSpin?: () => void }) {
+// Button component - built by Hershey Jamla
+export default function Button({ onSpin }: { onSpin?: () => void }) {
     // controls whether the spin animation is playing
     const [spinning, setSpinning] = useState(false);
 

@@ -1,4 +1,4 @@
-// ChallengeCard.tsx
+// Word.tsx
 // Global: Displays a single BU challenge with its title, description, category, and difficulty.
 // Component Author: Hershey Jamla
 
@@ -63,8 +63,8 @@ const StyledDifficultyBadge = styled.span`
     font-weight: 600;
 `;
 
-// ChallengeCard component - built by Hershey Jamla
-export default function ChallengeCard({ challenge }: { challenge: ChallengeCardProps }) {
+// Word component - built by Hershey Jamla
+export default function Word({ challenge }: { challenge: ChallengeCardProps }) {
     return (
         <StyledCard>
             <>

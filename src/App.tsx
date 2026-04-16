@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router";
 import styled from "styled-components";
-import ChallengeCard from "./components/ChallengeCard.tsx";
-import SpinButton from "./components/SpinButton.tsx";
-import CategoryFilter from "./components/CategoryFilter.tsx";
-import HistoryLog from "./components/HistoryLog.tsx";
+import Word from "./components/Word.tsx";
+import Button from "./components/Button.tsx";
+import Timer from "./components/Timer.tsx";
+import Language from "./components/Language.tsx";
 
 // Main page wrapper
 const StyledWrapper = styled.div`
@@ -32,13 +32,13 @@ function Root() {
           <Route path="/" element={
             <>
               {/* Category filter - built by  */}
-              <CategoryFilter />
+              <Timer />
 
               {/* Spin button - built by  */}
-              <SpinButton />
+              <Button />
 
               {/* Challenge card - built by Hershey Jamla */}
-              <ChallengeCard challenge={{
+              <Word challenge={{
                 title: "Eat at every dining hall in one day",
                 description: "Visit all BU dining halls before midnight.",
                 category: "Food",
@@ -46,7 +46,7 @@ function Root() {
               }} />
 
               {/* History log - built by  */}
-              <HistoryLog />
+              <Language />
             </>
           } />
         </Routes>
