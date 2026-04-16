@@ -6,6 +6,3 @@
 export default function HistoryLog() {
     return <></>;
 }
-export default function HistoryLog() {
-    return <></>;
-}

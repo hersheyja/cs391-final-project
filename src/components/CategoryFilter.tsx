@@ -7,6 +7,3 @@
 export default function CategoryFilter() {
     return <></>;
 }
-export default function CategoryFilter() {
-    return <></>;
-}

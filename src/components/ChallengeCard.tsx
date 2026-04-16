@@ -4,7 +4,6 @@
 
 import styled from "styled-components";
 
-// Type definition for the props this component expects
 type ChallengeCardProps = {
     title: string;
     description: string;
@@ -12,7 +11,6 @@ type ChallengeCardProps = {
     difficulty: string;
 };
 
-// Main card container
 const StyledCard = styled.div`
     background-color: white;
     border-radius: 12px;
@@ -23,7 +21,6 @@ const StyledCard = styled.div`
     width: 100%;
 `;
 
-// Challenge title at the top of the card
 const StyledChallengeTitle = styled.h2`
     font-size: 1.4rem;
     font-weight: bold;
@@ -31,7 +28,7 @@ const StyledChallengeTitle = styled.h2`
     margin-bottom: 12px;
 `;
 
-// Description text below the title
+// text below the title
 const StyledDescription = styled.p`
     font-size: 1rem;
     color: #333333;
@@ -39,14 +36,14 @@ const StyledDescription = styled.p`
     line-height: 1.5;
 `;
 
-// Row that holds the category and difficulty badges side by side
+//  category and difficulty
 const StyledBadgeRow = styled.div`
     display: flex;
     flex-direction: row;
     gap: 10px;
 `;
 
-// Badge showing the challenge category
+//  challenge category
 const StyledCategoryBadge = styled.span`
     background-color: #cc0000;
     color: white;
@@ -56,7 +53,7 @@ const StyledCategoryBadge = styled.span`
     font-weight: 600;
 `;
 
-// Badge showing the difficulty level
+//  difficulty level
 const StyledDifficultyBadge = styled.span`
     background-color: #333333;
     color: white;
