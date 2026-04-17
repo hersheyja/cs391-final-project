@@ -1,15 +1,13 @@
 // Timer.tsx
-// Global: Countdown timer for the Public Speaking Practice App.
-// Users can choose minutes and preset seconds, then start, pause, and reset the timer.
-// Max minutes allowed is 5.
-// Seconds options are only 00, 15, or 30.
-// Plays a sound when the timer finishes.
+// Global: Countdown timer for the Word Up public speaking practice app.
+// Users set a custom time using minute and second dropdowns, then start, pause, or reset the timer.
+// Plays an alarm sound when time runs out.
 // Component Author: Shouq Aldrees
 
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 
-// Main timer card
+//card container
 const StyledTimerCard = styled.div`
     background-color: white;
     border-radius: 12px;
@@ -21,14 +19,14 @@ const StyledTimerCard = styled.div`
     text-align: center;
 `;
 
-// Heading
+// timer section heading
 const StyledHeading = styled.h2`
     color: #cc0000;
     font-size: calc(1.2rem + 0.5vw);
     margin-bottom: 16px;
 `;
 
-// Wrapper for inputs
+//wrapper for minutes and seconds dropdown
 const StyledInputWrapper = styled.div`
     display: flex;
     justify-content: center;
@@ -37,21 +35,21 @@ const StyledInputWrapper = styled.div`
     flex-wrap: wrap;
 `;
 
-// Each input group
+// individual input group
 const StyledInputGroup = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
-// Input label
+// label above dropdown
 const StyledLabel = styled.label`
     font-size: 0.95rem;
     color: #666666;
     margin-bottom: 6px;
 `;
 
-// Shared dropdown style
+// dropdown select
 const StyledSelect = styled.select`
     width: 110px;
     padding: 10px;
@@ -68,7 +66,7 @@ const StyledSelect = styled.select`
     }
 `;
 
-// Timer display
+// Large countdown
 const StyledTimeDisplay = styled.div`
     font-size: calc(2rem + 1vw);
     font-weight: bold;
@@ -76,7 +74,7 @@ const StyledTimeDisplay = styled.div`
     margin: 20px 0;
 `;
 
-// Buttons row
+//  start, pause, reset buttons
 const StyledButtonRow = styled.div`
     display: flex;
     justify-content: center;
@@ -84,7 +82,7 @@ const StyledButtonRow = styled.div`
     flex-wrap: wrap;
 `;
 
-// Button style
+// Shared button style for start, pause, reset
 const StyledButton = styled.button`
     background-color: #cc0000;
     color: white;
@@ -104,7 +102,7 @@ const StyledButton = styled.button`
     }
 `;
 
-// Status text
+// Status message
 const StyledStatus = styled.p`
     margin-top: 16px;
     font-size: 1rem;
@@ -112,12 +110,16 @@ const StyledStatus = styled.p`
 `;
 
 export default function Timer() {
+    // Status message shown below buttons
     const [minutesInput, setMinutesInput] = useState<number>(1);
     const [secondsInput, setSecondsInput] = useState<number>(0);
+    // current time left in seconds
     const [timeLeft, setTimeLeft] = useState<number>(60);
+    // whether the timer is actively counting down
     const [isRunning, setIsRunning] = useState<boolean>(false);
+    // whether the timer has finished
     const [isFinished, setIsFinished] = useState<boolean>(false);
-
+    // ref to the alarm audio element
     const alarmRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
@@ -126,7 +128,7 @@ export default function Timer() {
         if (timeLeft <= 0) {
             setIsRunning(false);
             setIsFinished(true);
-
+            // alarm sound
             if (alarmRef.current) {
                 alarmRef.current.play();
             }
@@ -141,6 +143,7 @@ export default function Timer() {
         return () => clearInterval(interval);
     }, [isRunning, timeLeft]);
 
+    // start the timer if time is remaining
     function handleStart() {
         if (timeLeft > 0) {
             setIsRunning(true);
@@ -148,10 +151,11 @@ export default function Timer() {
         }
     }
 
+    //pause timer
     function handlePause() {
         setIsRunning(false);
     }
-
+    // reset timer
     function handleReset() {
         const totalSeconds = minutesInput * 60 + secondsInput;
         setIsRunning(false);
@@ -164,6 +168,7 @@ export default function Timer() {
         }
     }
 
+    // update total time when minutes dropdown changes
     function handleMinutesChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const value = Number(e.target.value);
         setMinutesInput(value);
@@ -174,6 +179,7 @@ export default function Timer() {
         }
     }
 
+    // update total time when seconds dropdown changes
     function handleSecondsChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const value = Number(e.target.value);
         setSecondsInput(value);
@@ -183,7 +189,7 @@ export default function Timer() {
             setIsFinished(false);
         }
     }
-
+    // format seconds
     function formatTime(totalSeconds: number): string {
         const mins = Math.floor(totalSeconds / 60);
         const secs = totalSeconds % 60;

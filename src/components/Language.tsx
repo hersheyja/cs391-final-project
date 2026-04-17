@@ -6,7 +6,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-// Container pinned to top right
+// container pinned to top right corner of the page
 const StyledContainer = styled.div`
     position: fixed;
     top: 16px;
@@ -22,14 +22,14 @@ const StyledContainer = styled.div`
     z-index: 999;
 `;
 
-// Language label
+// EN or AR label
 const StyledLabel = styled.span<{ $active: boolean }>`
     font-size: 0.85rem;
     font-weight: bold;
     color: ${({ $active }) => $active ? "#cc0000" : "#999999"};
 `;
 
-// The toggle track
+//  red when Arabic, gray when English
 const StyledTrack = styled.div<{ $isArabic: boolean }>`
     width: 44px;
     height: 24px;
@@ -40,7 +40,7 @@ const StyledTrack = styled.div<{ $isArabic: boolean }>`
     transition: background-color 0.3s;
 `;
 
-// The toggle knob
+// The knob placement depends on language
 const StyledKnob = styled.div<{ $isArabic: boolean }>`
     width: 18px;
     height: 18px;
@@ -52,30 +52,28 @@ const StyledKnob = styled.div<{ $isArabic: boolean }>`
     transition: left 0.3s;
 `;
 
-// Language component - built by Hershey Jamla
+// Language component
 export default function Language({ onToggle }: { onToggle?: (isArabic: boolean) => void }) {
-    // false = English, true = Arabic
+    // false = English (default), true = Arabic
     const [isArabic, setIsArabic] = useState(false);
 
+    // flip language and change page direction
     function handleToggle() {
         const newVal = !isArabic;
         setIsArabic(newVal);
-        // change page direction for Arabic
+        // rtl flips the entire page layout for Arabic
         document.documentElement.dir = newVal ? "rtl" : "ltr";
         if (onToggle) onToggle(newVal);
     }
 
     return (
         <StyledContainer>
-            {/* English label */}
             <StyledLabel $active={!isArabic}>EN</StyledLabel>
 
-            {/* Toggle switch */}
             <StyledTrack $isArabic={isArabic} onClick={handleToggle}>
                 <StyledKnob $isArabic={isArabic} />
             </StyledTrack>
 
-            {/* Arabic label */}
             <StyledLabel $active={isArabic}>AR</StyledLabel>
         </StyledContainer>
     );

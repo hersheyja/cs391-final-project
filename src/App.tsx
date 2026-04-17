@@ -1,3 +1,9 @@
+// App.tsx
+// Global: Entry point for the Word Up public speaking practice app.
+// Users pick a random word, optionally switch to Arabic, and use the timer to practice speaking.
+// Sets up routing using createBrowserRouter and RouterProvider.
+// Component Author: Hershey Jamla & Shouq Aldrees
+
 import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router";
 import styled, { createGlobalStyle } from "styled-components";
 import { useState } from "react";
@@ -7,6 +13,7 @@ import Timer from "./components/Timer.tsx";
 import Language from "./components/Language.tsx";
 import { fetchRandomWord, translateToArabic } from "./apis.tsx";
 
+// applied to the entire app
 const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
@@ -29,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
+// Full page wrapper centered vertically and horizontally
 const StyledWrapper = styled.div`
     width: 100%;
     min-height: 100vh;
@@ -38,6 +46,7 @@ const StyledWrapper = styled.div`
     padding: 32px 20px;
 `;
 
+// Main frosted glass card containing all content
 const StyledMainCard = styled.div`
     width: 100%;
     max-width: 1100px;
@@ -57,17 +66,20 @@ const StyledMainCard = styled.div`
     }
 `;
 
+// Top bar holding the language toggle on the right
 const StyledTopBar = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-bottom: 12px;
 `;
 
+//  title and subtitle
 const StyledHero = styled.div`
     text-align: center;
     margin-bottom: 32px;
 `;
 
+// badge above the title
 const StyledBadge = styled.div`
     display: inline-block;
     padding: 8px 14px;
@@ -79,6 +91,7 @@ const StyledBadge = styled.div`
     margin-bottom: 16px;
 `;
 
+// Main app title
 const StyledTitle = styled.h1`
     margin: 0;
     color: #d90429;
@@ -88,6 +101,7 @@ const StyledTitle = styled.h1`
     line-height: 1;
 `;
 
+// description below title
 const StyledSubtitle = styled.p`
     max-width: 700px;
     margin: 14px auto 0;
@@ -96,6 +110,7 @@ const StyledSubtitle = styled.p`
     line-height: 1.6;
 `;
 
+// two column grid
 const StyledContentGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -107,12 +122,14 @@ const StyledContentGrid = styled.div`
     }
 `;
 
+// holds the buttons and word card
 const StyledLeftColumn = styled.div`
     display: flex;
     flex-direction: column;
     gap: 18px;
 `;
 
+// holds timer
 const StyledRightColumn = styled.div`
     display: flex;
     flex-direction: column;
@@ -120,10 +137,14 @@ const StyledRightColumn = styled.div`
 `;
 
 function Root() {
+    // stores the original English word from the API
     const [englishWord, setEnglishWord] = useState<string>();
+    // stores the word currently displayed
     const [word, setWord] = useState<string>();
+    // tracks if Arabic mode is active
     const [isArabic, setIsArabic] = useState(false);
 
+    // fetch a new word and translate if Arabic is active
     async function handleSpin() {
         const randomWord = await fetchRandomWord();
         setEnglishWord(randomWord);
@@ -135,7 +156,7 @@ function Root() {
             setWord(randomWord);
         }
     }
-
+    // when language is toggled, translate or revert the current word
     async function handleLanguageToggle(showArabic: boolean) {
         setIsArabic(showArabic);
 
