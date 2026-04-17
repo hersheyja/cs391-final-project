@@ -37,7 +37,7 @@ export default function Word({ word = "Your word will appear here" }: { word?: s
 
             <StyledWord>{word}</StyledWord>
 
-            <StyledPrompt>Start the timer and speak about this word!</StyledPrompt>
+            <StyledPrompt>Start the timer and speak about this word</StyledPrompt>
         </StyledCard>
     );
 }
