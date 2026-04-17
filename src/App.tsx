@@ -172,7 +172,7 @@ function Root() {
                                     <StyledTitle>🗣️ Word Up</StyledTitle>
                                     <StyledSubtitle>
                                         Build confidence, think on your feet, and practice speaking
-                                        clearly with a random word challenge and a custom timer.
+                                        clearly with a random word challenge and a custom timer
                                     </StyledSubtitle>
                                 </StyledHero>
 
