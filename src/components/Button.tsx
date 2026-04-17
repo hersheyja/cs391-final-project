@@ -1,7 +1,7 @@
 // Button.tsx
 // Global: Button that fetches a new random word when clicked.
 // First click says "Pick My Word", after that says "New Word".
-// Component Author: Hershey Jamla
+// Component Author: Jun Kim
 
 import styled from "styled-components";
 import { useState } from "react";

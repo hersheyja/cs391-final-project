@@ -1,6 +1,6 @@
 // Word.tsx
 // Global: Displays a random word for the user to practice speaking about.
-// Component Author: Hershey Jamla
+// Component Author: Sarah Alhudaithy
 
 import styled from "styled-components";
 
@@ -30,7 +30,7 @@ const StyledPrompt = styled.p`
     color: #666666;
 `;
 
-// Word component - built by Hershey Jamla
+// Word component 
 export default function Word({ word = "Your word will appear here" }: { word?: string }) {
     return (
         <StyledCard>
