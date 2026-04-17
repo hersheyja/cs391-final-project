@@ -10,7 +10,7 @@ import Word from "./components/Word.tsx";
 import Button from "./components/Button.tsx";
 import Timer from "./components/Timer.tsx";
 import Language from "./components/Language.tsx";
-import { fetchRandomWord } from "./apis.tsx";
+import { fetchRandomWord, translateToArabic } from "./apis.tsx";
 
 // Page wrapper
 const StyledWrapper = styled.div`
@@ -42,11 +42,35 @@ const StyledSubtitle = styled.p`
 
 // Root layout
 function Root() {
+    const [englishWord, setEnglishWord] = useState<string>();
     const [word, setWord] = useState<string>();
+    const [isArabic, setIsArabic] = useState(false);
 
     async function handleSpin() {
         const randomWord = await fetchRandomWord();
-        setWord(randomWord);
+        setEnglishWord(randomWord);
+
+        if (isArabic) {
+            const arabicWord = await translateToArabic(randomWord);
+            setWord(arabicWord);
+        } else {
+            setWord(randomWord);
+        }
+    }
+
+    async function handleLanguageToggle(showArabic: boolean) {
+        setIsArabic(showArabic);
+
+        if (!englishWord) {
+            return;
+        }
+
+        if (showArabic) {
+            const arabicWord = await translateToArabic(englishWord);
+            setWord(arabicWord);
+        } else {
+            setWord(englishWord);
+        }
     }
 
     return (
@@ -58,8 +82,8 @@ function Root() {
                         <StyledTitle>🗣️ Word Up</StyledTitle>
                         <StyledSubtitle>Practice your public speaking — one word at a time.</StyledSubtitle>
 
-                        {/* Language toggle - TODO teammate */}
-                        <Language />
+                        {/* Language toggle */}
+                        <Language onToggle={handleLanguageToggle} />
 
                         {/* Pick word button - built by Hershey Jamla */}
                         <Button onSpin={handleSpin} />

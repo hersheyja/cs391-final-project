@@ -2,7 +2,6 @@
 // Global: Toggle switch to switch between English and Arabic.
 // Default is English. When switched to Arabic, page direction changes to right-to-left.
 // Component Author: Hershey Jamla
-// TODO (teammate): wire isArabic state to translation API to translate page content
 
 import styled from "styled-components";
 import { useState } from "react";
